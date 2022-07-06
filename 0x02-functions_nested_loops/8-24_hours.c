@@ -5,7 +5,8 @@
  * ours and resets mins
  * Return: 0
  */
-void jack_bauer(void){
+void jack_bauer(void)
+{
 int hours = 0;
 int minutes = 0;
 int hours_remainder;

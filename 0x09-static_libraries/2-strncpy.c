@@ -29,8 +29,3 @@ char *_strncpy(char *dest, char *src, int n)
 
 	return (dest);
 }
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-P

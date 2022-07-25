@@ -1,51 +1,53 @@
+#include "main.h"
 #include <stdlib.h>
 
 /**
- * argstostr - Concatenates all the arguments of the program
+ * argstostr - concatenates all the arguments of a program.
+ * @ac: argument count.
+ * @av: argument vector.
  *
- * @ac: Argument total count
- *
- * @av: Pointer to arguments
- *
- * Retunr: Pointer to concatenated string (SUCCESS) or
- * NULL if @ac == 0 or @av == NULL (FAILURE) or
- * NULL if if insufficient memory was available (FAILURE)
+ * Return: pointer of an array of char
  */
-
 char *argstostr(int ac, char **av)
 {
-	int i, j;
-	int count = 0;
-	int t_count = 0;
-	char *result;
+	char *aout;
+	int c, i, j, ia;
 
-	if (ac == 0 || av == NULL)
-		return ('\0');
-
-	for (i = 0; i < ac; i++)
+	if (ac == 0)
 	{
-		for (j = 0; av[i][j] != '\0'; j++)
-			t_count++;
+		return (NULL);
+	}
+	for (c = i = 0; i < ac; i++)
+	{
+		if (av[i] == NULL)
+			return (NULL);
 
-		t_count++;
+		for (j = 0; av[i][j] != '\0'; j++)
+			c++;
+		c++;
 	}
 
-	result = malloc(sizeof(char) * t_count + 1);
+	aout = malloc((c + 1) * sizeof(char));
 
-	if (result == NULL)
+	if (aout == NULL)
 	{
-		return ('\0');
+		free(aout);
+		return (NULL);
 	}
 
-	for (i = 0; i < ac; i++)
+	for (i = j = ia = 0; ia < c; j++, ia++)
 	{
-		for (j = 0; av[i][j] != '\0'; j++)
+		if (av[i][j] == '\0')
 		{
-			result[count++] = av[i][j];
+			aout[ia] = '\n';
+			i++;
+			ia++;
+			j = 0;
 		}
-		result[count++] = '\n';
+		if (ia < c - 1)
+			aout[ia] = av[i][j];
 	}
+	aout[ia] = '\0';
 
-	result[t_count] = '\0';
-	return (result);
+	return (aout);
 }
